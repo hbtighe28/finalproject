@@ -1,0 +1,97 @@
+<h1>The Market</h1>
+<h4>Browse for available items</h4>
+
+<table border = "1">
+<tr>
+  <th>User</th>
+
+  <th>Ingredient</th>
+
+  <th>Quantity Available</th>
+
+  <th>Location</th>
+  <th></th>
+
+</tr>
+
+<% @list_of_available.each do |a_ingredient| %>
+<tr>
+  <td><%= a_ingredient.user.first_name %></td>
+
+  <td><%= a_ingredient.item %></td>
+
+  <td><%= a_ingredient.quantity%></td>
+
+  <td><%= a_ingredient.location %></td>
+  <td>
+   <form action="/insert_message" method="post">
+      <div>
+        <label for="send_to_box">Send To</label>
+        <input type="text" id="send_to_box" name="query_send_to_id">
+      </div>
+
+      <div>
+       <label for="send_from_box">Sender</label>
+        <input type="text" id="send_from_box" name="query_send_from_id">
+      </div>
+
+    <button>Request!</button>
+  </form>
+  
+  </td>
+</tr>
+<% end%>
+</table>
+
+
+<% the_id = session.fetch(:user_id)%>
+<% if session.fetch(:user_id) != nil %>
+<%matching_user = User.where(:id => the_id)%>
+
+<%the_user = matching_user.at(0).first_name%>
+
+<h1><%=the_user%>'s Fridge</h1>
+<h4>Have something at home that you don't need? List it here!</h4>
+
+<table border = "1">
+<tr>
+  
+  <th>Ingredient</th>
+
+  <th>Quantity Owned</th>
+
+</tr>
+
+<% @list_of_owned.each do |owned_ingredient| %>
+<tr>
+  <td><%= owned_ingredient.item %></td>
+
+  <td><%= owned_ingredient.quantity%></td>
+
+</tr>
+<% end%>
+</table>
+
+<h1><%=the_user%>'s Wishlist</h1>
+<h4>Looking to make a recipe but missing something? List here to connect with other users!</h4>
+
+<table border = "1">
+<tr>
+  
+  <th>Ingredient</th>
+
+  <th>Quantity Needed</th>
+
+</tr>
+
+<% @list_of_need.each do |needed_ingredient| %>
+<tr>
+  <td><%= needed_ingredient.item %></td>
+
+  <td><%= needed_ingredient.quantity%></td>
+
+</tr>
+<% end%>
+</table>
+<%else %>
+<%end%>

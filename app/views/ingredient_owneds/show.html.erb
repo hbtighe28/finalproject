@@ -1,0 +1,101 @@
+<div>
+  <div>
+    <h1>
+      Ingredient owned #<%= @the_ingredient_owned.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/ingredient_owneds">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_ingredient_owned/<%= @the_ingredient_owned.id %>">
+          Delete ingredient owned
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Item
+      </dt>
+      <dd>
+        <%= @the_ingredient_owned.item %>
+      </dd>
+
+      <dt>
+        Quantity
+      </dt>
+      <dd>
+        <%= @the_ingredient_owned.quantity %>
+      </dd>
+
+      <dt>
+        Location
+      </dt>
+      <dd>
+        <%= @the_ingredient_owned.location %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_ingredient_owned.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_ingredient_owned.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit ingredient owned
+    </h2>
+
+    <form action="/modify_ingredient_owned/<%= @the_ingredient_owned.id %>"  method="post" >
+      <div>
+        <label for="item_box">
+          Item
+        </label>
+
+        <input type="text" id="item_box" name="query_item" value="<%= @the_ingredient_owned.item %>">
+      </div>
+
+      <div>
+        <label for="quantity_box">
+          Quantity
+        </label>
+
+        <input type="text" id="quantity_box" name="query_quantity" value="<%= @the_ingredient_owned.quantity %>">
+      </div>
+
+      <div>
+        <label for="location_box">
+          Location
+        </label>
+
+        <input type="text" id="location_box" name="query_location" value="<%= @the_ingredient_owned.location %>">
+      </div>
+
+      <button>
+        Update ingredient owned
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

@@ -1,0 +1,101 @@
+<div>
+  <div>
+    <h1>
+      Ingredient wanted #<%= @the_ingredient_wanted.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/ingredient_wanteds">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_ingredient_wanted/<%= @the_ingredient_wanted.id %>">
+          Delete ingredient wanted
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Item
+      </dt>
+      <dd>
+        <%= @the_ingredient_wanted.item %>
+      </dd>
+
+      <dt>
+        Quantity
+      </dt>
+      <dd>
+        <%= @the_ingredient_wanted.quantity %>
+      </dd>
+
+      <dt>
+        Location
+      </dt>
+      <dd>
+        <%= @the_ingredient_wanted.location %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_ingredient_wanted.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_ingredient_wanted.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit ingredient wanted
+    </h2>
+
+    <form action="/modify_ingredient_wanted/<%= @the_ingredient_wanted.id %>"  method="post" >
+      <div>
+        <label for="item_box">
+          Item
+        </label>
+
+        <input type="text" id="item_box" name="query_item" value="<%= @the_ingredient_wanted.item %>">
+      </div>
+
+      <div>
+        <label for="quantity_box">
+          Quantity
+        </label>
+
+        <input type="text" id="quantity_box" name="query_quantity" value="<%= @the_ingredient_wanted.quantity %>">
+      </div>
+
+      <div>
+        <label for="location_box">
+          Location
+        </label>
+
+        <input type="text" id="location_box" name="query_location" value="<%= @the_ingredient_wanted.location %>">
+      </div>
+
+      <button>
+        Update ingredient wanted
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

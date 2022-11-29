@@ -1,0 +1,46 @@
+<h1>Your Requests</h1>
+
+<hr>
+
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+
+        <th>
+          Sender
+        </th>
+
+        <th>
+          Message
+        </th>
+
+        <th>
+          Sent
+        </th>
+
+      </tr>
+      
+      <% @list_of_messages.each do |a_message| %>
+      <tr>
+        <td>
+          <%= a_message.user.first_name %> <%= a_message.user.last_name %>
+        </td>
+
+        <td>
+          <%= a_message.message %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_message.created_at) %> ago
+        </td>
+        
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

@@ -12,10 +12,31 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all' %>
+<ul>
+      <% if session.fetch(:user_id) == nil %>
+      <li>
+      <a href="/user_sign_in">Sign In</a>
+      </li>
+      <li>
+      <a href="/user_sign_up">Sign Up</a>
+      </li>
+      
+      <% else %>
+      <li>
+      <a href="/messages">Messages</a> 
+      </li>
+      <li>
+      <a href="/user_sign_out">Sign Out</a>
+      </li>
+      <% end %>
+  </ul>
 
   </head>
 
   <body>
+    <p style = "color: green"><%= notice%> </p>
+    <p style = "color: red"> <%= alert%> </p>
+
     <%= yield %>
   </body>
 </html>
