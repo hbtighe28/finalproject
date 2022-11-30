@@ -20,14 +20,12 @@ location = ["MPP", "MILA", "73"]
 end
 
 ingredient_owned = ["cookie", "carrot", "pizza", "salt", "garlic", "onion", "cumin", "peppers", "cilantro", "cake"]
-location = ["MPP", "MILA", "73"]
 quantity =[1,2,3]
 users = User.all
 
 10.times do 
   ingredient = IngredientOwned.new
   ingredient.item = ingredient_owned.sample
-  ingredient.location = location.sample
   ingredient.quantity = quantity.sample
   ingredient.user_id = users.sample.id
   ingredient.save

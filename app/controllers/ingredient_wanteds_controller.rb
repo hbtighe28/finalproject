@@ -20,7 +20,6 @@ class IngredientWantedsController < ApplicationController
   def create
     the_ingredient_wanted = IngredientWanted.new
     the_ingredient_wanted.item = params.fetch("query_item")
-    the_ingredient_wanted.location = params.fetch("query_location")
 
     if the_ingredient_wanted.valid?
       the_ingredient_wanted.save
@@ -35,8 +34,7 @@ class IngredientWantedsController < ApplicationController
     the_ingredient_wanted = IngredientWanted.where({ :id => the_id }).at(0)
 
     the_ingredient_wanted.item = params.fetch("query_item")
-    the_ingredient_wanted.quantity = params.fetch("query_quantity")
-    the_ingredient_wanted.location = params.fetch("query_location")
+
 
     if the_ingredient_wanted.valid?
       the_ingredient_wanted.save

@@ -65,19 +65,12 @@
     <form action="/insert_ingredient_owned" method="post">
       <div>
         <label for="item_box">
-          Item
+          Ingredient
         </label>
 
         <input type="text" id="item_box" name="query_item">
       </div>
 
-      <div>
-        <label for="location_box">
-          Location
-        </label>
-
-        <input type="text" id="location_box" name="query_location">
-      </div>
 
       <div>
       <input type="hidden" name = "user_name" value = "<%=session.fetch(:user_id)%>">
@@ -105,7 +98,9 @@
 <tr>
   <td><%= owned_ingredient.item.capitalize %></td>
   <td><%= time_ago_in_words(owned_ingredient.created_at) %> ago</td>
-  <td>
+  <td><a href="/delete_ingredient_owned/<%= owned_ingredient.id %>">
+          Delete
+        </a>
   </td>
 
 </tr>
@@ -120,18 +115,10 @@
     <form action="/insert_ingredient_wanted" method="post">
       <div>
         <label for="item_box">
-          Item
+          Ingredient
         </label>
 
         <input type="text" id="item_box" name="query_item">
-      </div>
-
-      <div>
-        <label for="location_box">
-          Location
-        </label>
-
-        <input type="text" id="location_box" name="query_location">
       </div>
 
       <div>
