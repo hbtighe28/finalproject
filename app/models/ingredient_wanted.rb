@@ -4,7 +4,6 @@
 #
 #  id         :integer          not null, primary key
 #  item       :string
-#  location   :string
 #  quantity   :float
 #  created_at :datetime         not null
 #  updated_at :datetime         not null

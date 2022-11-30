@@ -7,10 +7,10 @@
 
   <th>Ingredient</th>
 
-  <th>Quantity Available</th>
-
   <th>Location</th>
+  
   <th></th>
+  
 
 </tr>
 
@@ -18,27 +18,36 @@
 <tr>
   <td><%= a_ingredient.user.first_name %></td>
 
-  <td><%= a_ingredient.item %></td>
+  <td><%= a_ingredient.item.capitalize %></td>
 
-  <td><%= a_ingredient.quantity%></td>
-
-  <td><%= a_ingredient.location %></td>
+  <td><%= a_ingredient.user.location %></td>
+  
+  
   <td>
+  <% username = session.fetch(:user_id)%>
+  <% if a_ingredient.user.id != username && username != nil%>
+
    <form action="/insert_message" method="post">
+   
       <div>
-        <label for="send_to_box">Send To</label>
-        <input type="text" id="send_to_box" name="query_send_to_id">
+        <input type="hidden" name="send_to_box" value="<%= a_ingredient.user_id%>">
       </div>
 
       <div>
-       <label for="send_from_box">Sender</label>
-        <input type="text" id="send_from_box" name="query_send_from_id">
+        <input type="hidden" name="send_from_box" value="<%=session.fetch(:user_id)%>">
+      </div>
+
+      <div>
+        <input type="hidden" name="item_box" value="<%= a_ingredient.item%>">
       </div>
 
     <button>Request!</button>
   </form>
-  
+  <% else %>
   </td>
+  
+  <%end%>
+  
 </tr>
 <% end%>
 </table>
@@ -51,22 +60,53 @@
 <%the_user = matching_user.at(0).first_name%>
 
 <h1><%=the_user%>'s Fridge</h1>
-<h4>Have something at home that you don't need? List it here!</h4>
+  <h4>Have something at home that you don't need? List it here!</h4>
+
+    <form action="/insert_ingredient_owned" method="post">
+      <div>
+        <label for="item_box">
+          Item
+        </label>
+
+        <input type="text" id="item_box" name="query_item">
+      </div>
+
+      <div>
+        <label for="location_box">
+          Location
+        </label>
+
+        <input type="text" id="location_box" name="query_location">
+      </div>
+
+      <div>
+      <input type="hidden" name = "user_name" value = "<%=session.fetch(:user_id)%>">
+      
+
+      <button>
+        Add to your fridge!
+      </button>
+    </form>
+
+<hr>
 
 <table border = "1">
 <tr>
   
   <th>Ingredient</th>
 
-  <th>Quantity Owned</th>
+  <th>Posted at</th>
+
+  <th></th>
 
 </tr>
 
 <% @list_of_owned.each do |owned_ingredient| %>
 <tr>
-  <td><%= owned_ingredient.item %></td>
-
-  <td><%= owned_ingredient.quantity%></td>
+  <td><%= owned_ingredient.item.capitalize %></td>
+  <td><%= time_ago_in_words(owned_ingredient.created_at) %> ago</td>
+  <td>
+  </td>
 
 </tr>
 <% end%>
@@ -74,22 +114,59 @@
 
 <h1><%=the_user%>'s Wishlist</h1>
 <h4>Looking to make a recipe but missing something? List here to connect with other users!</h4>
+<div>
+  <div>
 
+    <form action="/insert_ingredient_wanted" method="post">
+      <div>
+        <label for="item_box">
+          Item
+        </label>
+
+        <input type="text" id="item_box" name="query_item">
+      </div>
+
+      <div>
+        <label for="location_box">
+          Location
+        </label>
+
+        <input type="text" id="location_box" name="query_location">
+      </div>
+
+      <div>
+      <input type="hidden" name = "user_name" value = "<%=session.fetch(:user_id)%>">
+      
+
+      <button>
+        Add to your wishlist!
+      </button>
+    </form>
+</div>
+
+<hr>
 <table border = "1">
 <tr>
   
   <th>Ingredient</th>
 
-  <th>Quantity Needed</th>
+  <th>Posted at</th>
+  <th></th>
 
 </tr>
 
 <% @list_of_need.each do |needed_ingredient| %>
 <tr>
   <td><%= needed_ingredient.item %></td>
+<td><%= time_ago_in_words(needed_ingredient.created_at) %> ago </td>
+  <td>
+    <div>
 
-  <td><%= needed_ingredient.quantity%></td>
-
+        <a href="/delete_ingredient_wanted/<%= needed_ingredient.id %>">
+          Delete
+        </a>
+    </div>
+  </td>
 </tr>
 <% end%>
 </table>

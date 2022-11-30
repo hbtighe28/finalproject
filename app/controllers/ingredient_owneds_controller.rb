@@ -20,14 +20,14 @@ class IngredientOwnedsController < ApplicationController
   def create
     the_ingredient_owned = IngredientOwned.new
     the_ingredient_owned.item = params.fetch("query_item")
-    the_ingredient_owned.quantity = params.fetch("query_quantity")
     the_ingredient_owned.location = params.fetch("query_location")
+    the_ingredient_owned.user_id = session.fetch(:user_id)
 
     if the_ingredient_owned.valid?
       the_ingredient_owned.save
-      redirect_to("/ingredient_owneds", { :notice => "Ingredient owned created successfully." })
+      redirect_to("/", { :notice => "Ingredient owned created successfully." })
     else
-      redirect_to("/ingredient_owneds", { :alert => the_ingredient_owned.errors.full_messages.to_sentence })
+      redirect_to("/", { :alert => the_ingredient_owned.errors.full_messages.to_sentence })
     end
   end
 

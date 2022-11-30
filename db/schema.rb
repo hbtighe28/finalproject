@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_29_021204) do
+ActiveRecord::Schema.define(version: 2022_11_29_170834) do
+
+  create_table "accepts", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "accept"
+    t.integer "send_to_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer "user_id"
@@ -23,7 +31,6 @@ ActiveRecord::Schema.define(version: 2022_11_29_021204) do
   create_table "ingredient_owneds", force: :cascade do |t|
     t.string "item"
     t.integer "quantity"
-    t.string "location"
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -32,7 +39,6 @@ ActiveRecord::Schema.define(version: 2022_11_29_021204) do
   create_table "ingredient_wanteds", force: :cascade do |t|
     t.string "item"
     t.float "quantity"
-    t.string "location"
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -42,6 +48,8 @@ ActiveRecord::Schema.define(version: 2022_11_29_021204) do
     t.integer "user_id"
     t.integer "send_to_id"
     t.text "message"
+    t.integer "item_id"
+    t.string "accept"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -51,7 +59,8 @@ ActiveRecord::Schema.define(version: 2022_11_29_021204) do
     t.string "password_digest"
     t.string "first_name"
     t.string "last_name"
-    t.string "username"
+    t.string "phone"
+    t.string "location"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

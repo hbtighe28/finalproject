@@ -1,9 +1,30 @@
 Rails.application.routes.draw do
 
+  # Routes for the Accept resource:
+
+  # CREATE
+  post("/insert_accept", { :controller => "accepts", :action => "create" })
+          
+  # READ
+  get("/accepts", { :controller => "accepts", :action => "index" })
+  
+  get("/accepts/:path_id", { :controller => "accepts", :action => "show" })
+  
+  # UPDATE
+  
+  post("/modify_accept/:path_id", { :controller => "accepts", :action => "update" })
+  
+  # DELETE
+  get("/delete_accept/:path_id", { :controller => "accepts", :action => "destroy" })
+
+  #------------------------------
+
   # Routes for the Message resource:
 
   # CREATE
   post("/insert_message", { :controller => "messages", :action => "create" })
+  
+  post("/accept/:path_id", {:controller => "messages", :action => "accept"})
           
   # READ
   get("/messages", { :controller => "messages", :action => "index" })

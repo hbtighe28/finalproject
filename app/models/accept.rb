@@ -1,17 +1,15 @@
 # == Schema Information
 #
-# Table name: messages
+# Table name: accepts
 #
 #  id         :integer          not null, primary key
 #  accept     :string
-#  message    :text
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  item_id    :integer
 #  send_to_id :integer
 #  user_id    :integer
 #
-class Message < ApplicationRecord
+class Accept < ApplicationRecord
   belongs_to(:user, {
     :class_name => "User",
     :foreign_key => "user_id"

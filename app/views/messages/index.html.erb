@@ -1,4 +1,4 @@
-<h1>Your Requests</h1>
+<h1>Your Messages</h1>
 
 <hr>
 
@@ -20,6 +20,9 @@
         <th>
           Sent
         </th>
+        <th>
+          
+        </th>
 
       </tr>
       
@@ -36,6 +39,15 @@
         <td>
           <%= time_ago_in_words(a_message.created_at) %> ago
         </td>
+        <td>
+      
+         <form action = "/accept/<%=a_message.id%>" method = "post">
+         <input name = "phone_number" type="hidden" value = "<%= a_message.user.phone%>">
+         <input name = "send_to" type="hidden" value ="<%= a_message.user.id%>">
+         <input name = "send_from" type= "hidden" value= "<%=session.fetch(:user_id)%>">
+          <button>Accept?</button>
+          </form>
+        </td>
         
       </tr>
       <% end %>
@@ -44,3 +56,106 @@
 </div>
 
 <hr>
+
+<h1>Sent Requests</h1>
+
+<hr>
+
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+
+        <th>
+          Request To
+        </th>
+
+        <th>
+          Message
+        </th>
+
+        <th>
+          Sent
+        </th>
+
+      </tr>
+      
+      <% @list_of_sent.each do |a_message| %>
+      <tr>
+        <td>
+          <% user = a_message.send_to_id %> 
+          <% user = User.where({:id => user}).at(0)%>
+          <%= user.first_name%> <%= user.last_name%>
+        </td>
+
+        <td>
+          <%= a_message.message %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_message.created_at) %> ago
+        </td>
+        
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<h1>Accepted Requests</h1>
+
+<hr>
+
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+
+        <th>
+          Person Giving
+        </th>
+
+        <th>
+          Item
+        </th>
+
+        <th>Phone Number</th>
+
+        <th>Time Accepted</th>
+
+      </tr>
+      
+      <% @list_of_accept.each do |a_message| %>
+      <tr>
+        <td>
+          <% user = a_message.send_to_id %> 
+          <% user = User.where({:id => user}).at(0)%>
+          <%= user.first_name%> <%= user.last_name%>
+        </td>
+
+        <td>
+         <% item = a_message.item_id%>
+         <% item = IngredientOwned.where({:id => item}).at(0)%>
+         <%= item.item.capitalize %>
+         
+        </td>
+
+        <td>
+        <% person_id = a_message.send_to_id%>
+        <% person = User.where({:id => person_id}).at(0)%>
+        <%= person.phone%>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_message.created_at) %> ago
+        </td>
+        
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

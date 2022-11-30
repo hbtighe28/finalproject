@@ -1,0 +1,101 @@
+<div>
+  <div>
+    <h1>
+      Accept #<%= @the_accept.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/accepts">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_accept/<%= @the_accept.id %>">
+          Delete accept
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        User
+      </dt>
+      <dd>
+        <%= @the_accept.user_id %>
+      </dd>
+
+      <dt>
+        Accept
+      </dt>
+      <dd>
+        <%= @the_accept.accept %>
+      </dd>
+
+      <dt>
+        Send to
+      </dt>
+      <dd>
+        <%= @the_accept.send_to_id %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_accept.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_accept.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit accept
+    </h2>
+
+    <form action="/modify_accept/<%= @the_accept.id %>"  method="post" >
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_accept.user_id %>">
+      </div>
+
+      <div>
+        <label for="accept_box">
+          Accept
+        </label>
+
+        <input type="text" id="accept_box" name="query_accept" value="<%= @the_accept.accept %>">
+      </div>
+
+      <div>
+        <label for="send_to_id_box">
+          Send to
+        </label>
+
+        <input type="text" id="send_to_id_box" name="query_send_to_id" value="<%= @the_accept.send_to_id %>">
+      </div>
+
+      <button>
+        Update accept
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

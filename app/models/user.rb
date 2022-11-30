@@ -6,8 +6,9 @@
 #  email           :string
 #  first_name      :string
 #  last_name       :string
+#  location        :string
 #  password_digest :string
-#  username        :string
+#  phone           :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #

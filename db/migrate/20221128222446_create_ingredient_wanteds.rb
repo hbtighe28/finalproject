@@ -3,7 +3,6 @@ class CreateIngredientWanteds < ActiveRecord::Migration[6.0]
     create_table :ingredient_wanteds do |t|
       t.string :item
       t.float :quantity
-      t.string :location
       t.integer :user_id
 
       t.timestamps

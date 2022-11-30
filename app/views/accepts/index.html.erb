@@ -1,0 +1,118 @@
+<div>
+  <div>
+    <h1>
+      List of all accepts
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new accept
+    </h2>
+
+    <form action="/insert_accept" method="post">
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id">
+      </div>
+
+      <div>
+        <label for="accept_box">
+          Accept
+        </label>
+
+        <input type="text" id="accept_box" name="query_accept">
+      </div>
+
+      <div>
+        <label for="send_to_id_box">
+          Send to
+        </label>
+
+        <input type="text" id="send_to_id_box" name="query_send_to_id">
+      </div>
+
+      <button>
+        Create accept
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          User
+        </th>
+
+        <th>
+          Accept
+        </th>
+
+        <th>
+          Send to
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_accepts.each do |an_accept| %>
+      <tr>
+        <td>
+          <%= an_accept.id %>
+        </td>
+
+        <td>
+          <%= an_accept.user_id %>
+        </td>
+
+        <td>
+          <%= an_accept.accept %>
+        </td>
+
+        <td>
+          <%= an_accept.send_to_id %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(an_accept.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(an_accept.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/accepts/<%= an_accept.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>
