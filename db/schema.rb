@@ -10,23 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_29_170834) do
-
-  create_table "accepts", force: :cascade do |t|
-    t.integer "user_id"
-    t.string "accept"
-    t.integer "send_to_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "bookmarks", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "ingredient_owned_id"
-    t.integer "ingredient_wanted_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
+ActiveRecord::Schema.define(version: 2022_11_29_021204) do
 
   create_table "ingredient_owneds", force: :cascade do |t|
     t.string "item"

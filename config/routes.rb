@@ -1,24 +1,5 @@
 Rails.application.routes.draw do
 
-  # Routes for the Accept resource:
-
-  # CREATE
-  post("/insert_accept", { :controller => "accepts", :action => "create" })
-          
-  # READ
-  get("/accepts", { :controller => "accepts", :action => "index" })
-  
-  get("/accepts/:path_id", { :controller => "accepts", :action => "show" })
-  
-  # UPDATE
-  
-  post("/modify_accept/:path_id", { :controller => "accepts", :action => "update" })
-  
-  # DELETE
-  get("/delete_accept/:path_id", { :controller => "accepts", :action => "destroy" })
-
-  #------------------------------
-
   # Routes for the Message resource:
 
   # CREATE
@@ -29,33 +10,9 @@ Rails.application.routes.draw do
   # READ
   get("/messages", { :controller => "messages", :action => "index" })
   
-  get("/messages/:path_id", { :controller => "messages", :action => "show" })
-  
-  # UPDATE
-  
-  post("/modify_message/:path_id", { :controller => "messages", :action => "update" })
-  
   # DELETE
   get("/delete_message/:path_id", { :controller => "messages", :action => "destroy" })
 
-  #------------------------------
-
-  # Routes for the Bookmark resource:
-
-  # CREATE
-  post("/insert_bookmark", { :controller => "bookmarks", :action => "create" })
-          
-  # READ
-  get("/bookmarks", { :controller => "bookmarks", :action => "index" })
-  
-  get("/bookmarks/:path_id", { :controller => "bookmarks", :action => "show" })
-  
-  # UPDATE
-  
-  post("/modify_bookmark/:path_id", { :controller => "bookmarks", :action => "update" })
-  
-  # DELETE
-  get("/delete_bookmark/:path_id", { :controller => "bookmarks", :action => "destroy" })
 
   #------------------------------
 
@@ -65,7 +22,7 @@ Rails.application.routes.draw do
   post("/insert_ingredient_owned", { :controller => "ingredient_owneds", :action => "create" })
           
   # READ
-  get("/ingredient_owneds", { :controller => "ingredient_owneds", :action => "index" })
+  get("/ingredient_owned", { :controller => "ingredient_owneds", :action => "index" })
   
   get("/ingredient_owneds/:path_id", { :controller => "ingredient_owneds", :action => "show" })
   
@@ -128,5 +85,6 @@ get("/", {:controller => "market", :action => "index"})
 
 get("/messages", {:controller => "market", :action => "receive_message"})
 
+get("/find_recipes", {:controller => "ingredient_owneds", :action => "find_recipes"})
 
 end

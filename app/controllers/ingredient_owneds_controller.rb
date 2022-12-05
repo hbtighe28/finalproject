@@ -1,10 +1,14 @@
 class IngredientOwnedsController < ApplicationController
   def index
     matching_ingredient_owneds = IngredientOwned.all
+    
+    the_id = session.fetch(:user_id)
+    @list_of_owned = IngredientOwned.where( :user_id => the_id)
 
-    @list_of_ingredient_owneds = matching_ingredient_owneds.order({ :created_at => :desc })
 
+    
     render({ :template => "ingredient_owneds/index.html.erb" })
+
   end
 
   def show
@@ -53,5 +57,51 @@ class IngredientOwnedsController < ApplicationController
     the_ingredient_owned.destroy
 
     redirect_to("/", { :notice => "Ingredient owned deleted successfully."} )
+  end
+
+  def find_recipes
+
+    ingredient = params.fetch("ingredient")
+
+    key = ENV.fetch("SPOON_KEY")
+    
+    @url = "https://api.spoonacular.com/recipes/findByIngredients?apiKey="+ key + "&ingredients=" + ingredient
+    raw_data =open(@url).read
+    parsed_data = JSON.parse(raw_data)
+    @ingredient_name = parsed_data.at(0).fetch("usedIngredients").at(0).fetch("name")
+    @recipe_name_one = parsed_data.at(0).fetch("title")
+    recipe_id_one = parsed_data.at(0).fetch("id")
+
+    @recipe_name_two = parsed_data.at(1).fetch("title")
+    recipe_id_two = parsed_data.at(1).fetch("id")
+
+    @recipe_name_three = parsed_data.at(2).fetch("title")
+    recipe_id_three = parsed_data.at(2).fetch("id")
+
+
+    @recipe_photo_one = parsed_data.at(0).fetch("image")
+    @recipe_photo_two = parsed_data.at(1).fetch("image")
+    @recipe_photo_three = parsed_data.at(2).fetch("image")
+
+
+    url_1 = "https://api.spoonacular.com/recipes/" + recipe_id_one.to_s + "/information?apiKey=" + key +"&includeNutrition=false"
+    raw_data = open(url_1).read
+    parsed_data = JSON.parse(raw_data)
+    @recipe_link_one = parsed_data.fetch("sourceUrl")
+
+    url_2 = "https://api.spoonacular.com/recipes/" + recipe_id_two.to_s + "/information?apiKey=7abec61d9bdb4ccba70af8dedf2dddd4&includeNutrition=false"
+    raw_data = open(url_2).read
+    parsed_data = JSON.parse(raw_data)
+    @recipe_link_two = parsed_data.fetch("sourceUrl")
+
+    url_3 = "https://api.spoonacular.com/recipes/" + recipe_id_three.to_s + "/information?apiKey=7abec61d9bdb4ccba70af8dedf2dddd4&includeNutrition=false"
+    raw_data = open(url_3).read
+    parsed_data = JSON.parse(raw_data)
+    @recipe_link_three = parsed_data.fetch("sourceUrl")
+
+    
+
+
+    render({:template => "ingredient_owneds/recipes.html.erb"})
   end
 end

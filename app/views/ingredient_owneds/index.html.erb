@@ -1,7 +1,7 @@
 <div>
   <div>
     <h1>
-      List of all ingredient owneds
+      Your Fridge
     </h1>
   </div>
 </div>
@@ -11,7 +11,7 @@
 <div>
   <div>
     <h2>
-      Add a new ingredient owned
+      Add Items!
     </h2>
 
     <form action="/insert_ingredient_owned" method="post">
@@ -23,24 +23,9 @@
         <input type="text" id="item_box" name="query_item">
       </div>
 
-      <div>
-        <label for="quantity_box">
-          Quantity
-        </label>
-
-        <input type="text" id="quantity_box" name="query_quantity">
-      </div>
-
-      <div>
-        <label for="location_box">
-          Location
-        </label>
-
-        <input type="text" id="location_box" name="query_location">
-      </div>
 
       <button>
-        Create ingredient owned
+        Add Ingredient
       </button>
     </form>
   </div>
@@ -51,68 +36,43 @@
   <div>
     <table border="1">
       <tr>
-        <th>
-          ID
-        </th>
 
         <th>
           Item
         </th>
 
-        <th>
-          Quantity
-        </th>
-
-        <th>
-          Location
-        </th>
 
         <th>
           Created at
         </th>
 
-        <th>
-          Updated at
-        </th>
+        <th></th>
 
-        <th>
-        </th>
       </tr>
 
-      <% @list_of_ingredient_owneds.each do |an_ingredient_owned| %>
+      <% @list_of_owned.each do |an_ingredient_owned| %>
       <tr>
+        
         <td>
-          <%= an_ingredient_owned.id %>
-        </td>
-
-        <td>
-          <%= an_ingredient_owned.item %>
-        </td>
-
-        <td>
-          <%= an_ingredient_owned.quantity %>
-        </td>
-
-        <td>
-          <%= an_ingredient_owned.location %>
+          <%= an_ingredient_owned.item.capitalize %>
         </td>
 
         <td>
           <%= time_ago_in_words(an_ingredient_owned.created_at) %> ago
         </td>
-        <td>
-          <%= time_ago_in_words(an_ingredient_owned.updated_at) %> ago
-        </td>
 
         <td>
-          <a href="/ingredient_owneds/<%= an_ingredient_owned.id %>">
-            Show details
-          </a>
+        <form action="/find_recipes">
+        <input type="hidden" name="ingredient" id="ingredient_box" value="<%=an_ingredient_owned.item%>">
+        <button>Find Recipes</button>
+        </form>
         </td>
+
       </tr>
       <% end %>
     </table>
   </div>
 </div>
+
 
 <hr>

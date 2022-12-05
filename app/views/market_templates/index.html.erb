@@ -52,12 +52,12 @@
 <% end%>
 </table>
 
+<% if session.fetch(:user_id) != nil %>
 
 <% the_id = session.fetch(:user_id)%>
-<% if session.fetch(:user_id) != nil %>
-<%matching_user = User.where(:id => the_id)%>
+<% matching_user = User.where(:id => the_id)%>
 
-<%the_user = matching_user.at(0).first_name%>
+<% the_user = matching_user.at(0).first_name%>
 
 <h1><%=the_user%>'s Fridge</h1>
   <h4>Have something at home that you don't need? List it here!</h4>
@@ -91,6 +91,7 @@
   <th>Posted at</th>
 
   <th></th>
+  <th></th>
 
 </tr>
 
@@ -102,10 +103,18 @@
           Delete
         </a>
   </td>
+  <td>
+  <form action="/find_recipes">
+        <input type="hidden" name="ingredient" id="ingredient_box" value="<%=owned_ingredient.item%>">
+        <button>Find Recipes</button>
+  </form>
+  </td>
 
 </tr>
 <% end%>
 </table>
+
+
 
 <h1><%=the_user%>'s Wishlist</h1>
 <h4>Looking to make a recipe but missing something? List here to connect with other users!</h4>
@@ -157,5 +166,6 @@
 </tr>
 <% end%>
 </table>
+
 <%else %>
 <%end%>

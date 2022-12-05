@@ -1,0 +1,24 @@
+<h1>Recipes with <%=@ingredient_name.capitalize%></h1>
+
+<table border ="1">
+<tr>
+  <th>Recipe Name</th>
+  <th>Photo</th>
+  <th></th>
+</tr>
+<tr>
+  <td><%= @recipe_name_one%></li></td>
+  <td><img src="<%=@recipe_photo_one.to_s%>"></td>
+  <td><a href="<%=@recipe_link_one%>">Link to Recipe</a></td>
+</tr>
+<tr>
+  <td><%= @recipe_name_two%></td>
+  <td><img src="<%=@recipe_photo_two%>"></td>
+  <td><a href="<%=@recipe_link_two%>">Link to Recipe</a></td>
+</tr>
+<tr>
+  <td><%= @recipe_name_three%></td>
+  <td><img src="<%=@recipe_photo_three%>"></td>
+  <td><a href="<%=@recipe_link_three%>">Link to Recipe</a></td>
+</tr>
+</table>
