@@ -20,6 +20,7 @@ class IngredientWantedsController < ApplicationController
   def create
     the_ingredient_wanted = IngredientWanted.new
     the_ingredient_wanted.item = params.fetch("query_item")
+    the_ingredient_wanted.user_id = session.fetch(:user_id)
 
     if the_ingredient_wanted.valid?
       the_ingredient_wanted.save

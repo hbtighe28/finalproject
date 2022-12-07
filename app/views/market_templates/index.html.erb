@@ -8,8 +8,10 @@
   <th>Ingredient</th>
 
   <th>Location</th>
-  
+  <% if session.fetch(:user_id) != nil  %>
   <th></th>
+  <%else%>
+  <%end%>
   
 
 </tr>
@@ -22,10 +24,10 @@
 
   <td><%= a_ingredient.user.location %></td>
   
-  
-  <td>
-  <% username = session.fetch(:user_id)%>
+   <% username = session.fetch(:user_id)%>
   <% if a_ingredient.user.id != username && username != nil%>
+  <td>
+ 
 
    <form action="/insert_message" method="post">
    
@@ -43,9 +45,9 @@
 
     <button>Request!</button>
   </form>
-  <% else %>
+ 
   </td>
-  
+   <% else %>
   <%end%>
   
 </tr>
@@ -85,20 +87,22 @@
 
 <table border = "1">
 <tr>
-  
+  <% if @list_of_owned.at(0) != nil%>
   <th>Ingredient</th>
 
   <th>Posted at</th>
 
   <th></th>
   <th></th>
-
+<%else%>
+<%end%>
 </tr>
-
+<% %>
 <% @list_of_owned.each do |owned_ingredient| %>
 <tr>
   <td><%= owned_ingredient.item.capitalize %></td>
   <td><%= time_ago_in_words(owned_ingredient.created_at) %> ago</td>
+  
   <td><a href="/delete_ingredient_owned/<%= owned_ingredient.id %>">
           Delete
         </a>
@@ -117,7 +121,7 @@
 
 
 <h1><%=the_user%>'s Wishlist</h1>
-<h4>Looking to make a recipe but missing something? List here to connect with other users!</h4>
+<h4>Looking to make a recipe but missing something? List it here!</h4>
 <div>
   <div>
 
@@ -143,17 +147,20 @@
 <hr>
 <table border = "1">
 <tr>
-  
+  <% if @list_of_need.at(0) != nil%>
   <th>Ingredient</th>
 
   <th>Posted at</th>
-  <th></th>
 
+  <th></th>
+  
+<%else%>
+<%end%>
 </tr>
 
 <% @list_of_need.each do |needed_ingredient| %>
 <tr>
-  <td><%= needed_ingredient.item %></td>
+  <td><%= needed_ingredient.item.capitalize %></td>
 <td><%= time_ago_in_words(needed_ingredient.created_at) %> ago </td>
   <td>
     <div>

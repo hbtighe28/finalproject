@@ -5,7 +5,7 @@ class MarketController < ApplicationController
     the_id = session.fetch(:user_id)
     @list_of_owned = IngredientOwned.where( :user_id => the_id)
 
-    @list_of_need = IngredientWanted.all
+    @list_of_need = IngredientWanted.where( :user_id => the_id)
 
     
 

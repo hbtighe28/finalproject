@@ -14,7 +14,6 @@ ActiveRecord::Schema.define(version: 2022_11_29_021204) do
 
   create_table "ingredient_owneds", force: :cascade do |t|
     t.string "item"
-    t.integer "quantity"
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -22,7 +21,6 @@ ActiveRecord::Schema.define(version: 2022_11_29_021204) do
 
   create_table "ingredient_wanteds", force: :cascade do |t|
     t.string "item"
-    t.float "quantity"
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
